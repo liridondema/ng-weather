@@ -8,6 +8,7 @@ import { ConditionsAndZip } from "../../models/conditions-and-zip.type";
 import { Forecast } from "../../models/forecast.type";
 import { LocationService } from "./location.service";
 import { CacheService } from "./cache.service";
+import { ToastrService } from "ngx-toastr";
 
 const CONDITION = "condition_";
 const FORECAST = "forecast_";
@@ -23,6 +24,7 @@ export class WeatherService {
   private readonly _http = inject(HttpClient);
   private readonly _locationService = inject(LocationService);
   private readonly _cacheService = inject(CacheService);
+  private readonly _toastr = inject(ToastrService);
 
   constructor() {
     // sync locations with conditions
@@ -73,6 +75,7 @@ export class WeatherService {
         },
         (error: HttpErrorResponse) => {
           const message = `Error fetching weather data for zip code ${zipcode} : ${error.error.message}`;
+          this._toastr.error(message, "Error!");
           console.info(message);
           this._locationService.removeLocation(zipcode);
         }

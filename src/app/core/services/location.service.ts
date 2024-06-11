@@ -6,6 +6,7 @@ import {
   WritableSignal,
 } from "@angular/core";
 import { CacheService } from "./cache.service";
+import { ToastrService } from "ngx-toastr";
 
 export const LOCATIONS: string = "locations";
 
@@ -14,7 +15,8 @@ export class LocationService {
   private _locations: WritableSignal<string[]> = signal<string[]>([]);
   public readonly locations: Signal<string[]> = this._locations.asReadonly();
 
-  private _cacheService = inject(CacheService);
+  private readonly _cacheService = inject(CacheService);
+  private readonly _toastr = inject(ToastrService);
 
   constructor() {
     // load locations from cache
@@ -28,6 +30,7 @@ export class LocationService {
     const locations = [...this._locations()];
     if (locations.includes(zipcode)) {
       const message = `The zip code ${zipcode} is already added.`;
+      this._toastr.info(message, "Location existing!");
       console.info(message);
     } else {
       this.updateLocations([...this._locations(), zipcode]);

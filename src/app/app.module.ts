@@ -1,6 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
 
 import { AppComponent } from "./app.component";
 import { ZipcodeEntryComponent } from "./components/zipcode-entry/zipcode-entry.component";
@@ -33,6 +35,8 @@ import { CacheTimerComponent } from "./components/cache-timer/cache-timer.compon
   ],
   bootstrap: [AppComponent],
   imports: [
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     BrowserModule,
     FormsModule,
     RouterModule,
