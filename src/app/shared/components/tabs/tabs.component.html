@@ -1,0 +1,15 @@
+<div class="column">
+  <div class="row">
+    @for (tab of tabs; track tab.id){
+    <div
+      class="header"
+      (click)="showTabContent(tab)"
+      [ngClass]="{ active: tab == activeTab }"
+    >
+      <h6 class="title">{{ tab.title }}</h6>
+      <span class="close" (click)="deleteTab(tab.id)">&#10006;</span>
+    </div>
+    }
+  </div>
+  <ng-container *ngTemplateOutlet="activeTab?.templateRef"></ng-container>
+</div>

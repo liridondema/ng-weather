@@ -1,0 +1,15 @@
+<div class="well">
+  <h2>Set caching time in seconds</h2>
+  <input
+    type="number"
+    #cache
+    placeholder="Caching time"
+    name="cache"
+    min="0"
+    class="form-control"
+  />
+  <br />
+  <button class="btn btn-primary" (click)="setCachingTime(cache.value)">
+    Set time
+  </button>
+</div>
